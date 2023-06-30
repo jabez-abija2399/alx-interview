@@ -4,7 +4,6 @@
 Pascal's Triangle
 """
 
-
 def pascal_triangle(n):
     """Print Pascal's Triangle
 
