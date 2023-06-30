@@ -11,19 +11,19 @@ def pascal_triangle(n):
     Args:
         n (int): Size of the pascal triangle
     """
-    res = []
+    triangle = []
     if (n <= 0):
-        return res
+        return triangle
     else:
         for x in range(n+1):
-            temp = []
+            row = []
             # first element is always 1
             c = 1
             for y in range(1, x+1):
                 # first value in a line is always 1
-                temp.append(c)
+                row.append(c)
                 # using Binomial Coefficient
                 c = c * (x - y) // y
-            if (len(temp)):
-                res.append(temp)
-    return re
+            if (len(row)):
+                triangle.append(row)
+    return triangle
