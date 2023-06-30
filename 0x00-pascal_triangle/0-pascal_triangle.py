@@ -6,13 +6,13 @@ def pascal_triangle(n):
     """ Returns a list of lists of integers
     representing the Pascal's triangle of n
     """
-    aList = []
+    triangle = []
     if n <= 0:
-        return aList
+        return triangle
 
-    aList = [[1]]
+    triangle = [[1]]
     if n == 1:
-        return aList
+        return triangle
 
     for row in range(1, n):
         left = -1
@@ -20,12 +20,12 @@ def pascal_triangle(n):
         listInt = []
         for column in range(row+1):
             integer = 0
-            if left > -1:
-                integer += aList[row - 1][left]
+            if left > -1:triangle
+                integer += triangle[row - 1][left]
             if right < row:
-                integer += aList[row - 1][right]
+                integer += triangle[row - 1][right]
             left += 1
             right += 1
             listInt.append(integer)
-        aList.append(listInt)
-    return aList
+        triangle.append(listInt)
+    return triangle
