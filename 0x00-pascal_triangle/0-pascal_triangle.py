@@ -1,16 +1,29 @@
+#!/usr/bin/python3
+
+"""
+Pascal's Triangle
+"""
+
+
 def pascal_triangle(n):
-    if n <= 0:
-        return []
+    """Print Pascal's Triangle
 
-    triangle = []
-    for i in range(n):
-        row = [1]
-        if i > 0:
-            prev_row = triangle[i-1]
-            for j in range(1, i):
-                element = prev_row[j-1] + prev_row[j]
-                row.append(element)
-            row.append(1)
-        triangle.append(row)
-
-    return triangle
+    Args:
+        n (int): Size of the pascal triangle
+    """
+    Triangle = []
+    if (n <= 0):
+        return Triangle
+    else:
+        for x in range(n+1):
+            row = []
+            # first element is always 1
+            c = 1
+            for y in range(1, x+1):
+                # first value in a line is always 1
+                row.append(c)
+                # using Binomial Coefficient
+                c = c * (x - y) // y
+            if (len(row)):
+                Triangle.append(temp)
+    return Triangle
