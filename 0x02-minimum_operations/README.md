@@ -13,4 +13,4 @@
 * All your files must be executable
 
 ## Tasks
-* [minoperation.py](0./minoperation.py) 0. Minimum Operations 
+* [minoperation.py](./minoperation.py) 0. Minimum Operations 
