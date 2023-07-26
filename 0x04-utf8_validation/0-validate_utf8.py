@@ -32,4 +32,3 @@ def validUTF8(data):
     if bytesLong == 0:
         return True
     return False
-
