@@ -17,3 +17,5 @@
 * Your code should use the PEP 8 style (version 1.7.x)
 * All your files must be executable
 
+# TASK
+* [0-validate_utf8.py](./0-validate_utf8.py) 0. UTF-8 Validation 
