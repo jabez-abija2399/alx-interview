@@ -1,41 +1,103 @@
-#!/usr/bin/env python3
-""" The N queens puzzle is the challenge of placing N non-attacking queens on
-    an N×N chessboard. Write a program that solves the N queens problem.
-    Usage: nqueens N
-        If the user called the program with the wrong number of arguments,
-        print Usage: nqueens N, followed by a new line,
-        and exit with the status 1
-    where N must be an integer greater or equal to 4
-        If N is not an integer, print N must be a number,
-        followed by a new line, and exit with the status 1
-        If N is smaller than 4, print N must be at least 4,
-        followed by a new line, and exit with the status 1
-    The program should print every possible solution to the problem
-        One solution per line
-        You don’t have to print the solutions in a specific order
-    You are only allowed to import the sys module """
+#!/usr/bin/python3
+"""N Queens
+n queens problem of placing n non-attacking queens on an n×n chessboard
+solution requires that no two queens share the same row, column, or diagonal
+"""
 import sys
 
 
-def nqueens(n: int):
+def checkNqueensArgs(args):
+    """Check for validity of arguement of Nqueen
     """
-    backtracking
+    if len(args) != 2:
+        print("Usage: nqueens N")
+        sys.exit(1)
+    try:
+        N = int(args[1])
+        if N < 4:
+            print("N must be at least 4")
+            sys.exit(1)
+    except Exception:
+        print("N must be a number")
+        sys.exit(1)
+
+    return N
+
+
+def display_board(board):
+    """Print board of NxN
     """
-    matrix = [[0 for x in range(n)] for y in range(n)]
-    print(str(matrix))
+    for row in board:
+        print(str(row).replace(',', '').replace('\'', ''))
+    print()
+
+
+def nQueens(board):
+    """n queens problem of placing n non-attacking queens on an n×n
+    """
+    res = []
+    for i in range(len(board)):
+        temp = []
+        for j in range(len(board)):
+            if board[i][j] == 'Q':
+                temp.append(i)
+                temp.append(j)
+        res.append(temp)
+    print(res)
+
+
+def isSafe(board, row, col):
+    """Check if two queens threaten each other or not
+    """
+    # return False if two queen share the same column
+    for i in range(row):
+        if board[i][col] == 'Q':
+            return False
+
+    # return false if two queen share vertical diagonal
+    (i, j) = (row, col)
+    while i >= 0 and j >= 0:
+        if board[i][j] == 'Q':
+            return False
+        i -= 1
+        j -= 1
+
+    # return false if two queen share the same '/' diagonal
+    (i, j) = (row, col)
+    while i >= 0 and j < len(board):
+        if board[i][j] == 'Q':
+            return False
+        i -= 1
+        j += 1
+
+    return True
+
+
+def chessBoard(board, row):
+    """Create a ChessBoard of NxN
+    """
+    # if `N` queens are placed successfully, print the solution
+    if row == len(board):
+        nQueens(board)
+        return
+
+    # place queen at every square in the current row `r`
+    # and recur for each valid movement
+    for i in range(len(board)):
+        # if no two queens threaten each other
+        if isSafe(board, row, i):
+            # place queen on the current square
+            board[row][i] = 'Q'
+
+            # recur for the next row
+            chessBoard(board, row + 1)
+
+            #  backtrack and remove the queen from the current square\
+            board[row][i] = '*'
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 2 or len(sys.argv) < 2:
-        print("Usage: nqueens N")
-        exit(1)
-
-    if not sys.argv[1].isdigit():
-        print("N must be a number")
-        exit(1)
-
-    if int(sys.argv[1]) < 4:
-        print("N must be at least 4")
-        exit(1)
-
-    nqueens(int(sys.argv[1]))
+    N = checkNqueensArgs(sys.argv)
+    # Create board
+    board = [["*" for i in range(N)] for j in range(N)]
+    chessBoard(board, 0)
