@@ -19,3 +19,7 @@
 ## [0x04-utf8_validation](https://github.com/jabez-abija2399/alx-interview/tree/main/0x04-utf8_validation)
 * ## It focus on 
 	* 0. UTF-8 Validation 
+
+## [0x05-nqueens](./0x05-nqueens)	
+* ## It focus on
+	* N Queens
