@@ -14,3 +14,4 @@
     * All your files must be executable
 
 * ## Tasks
+	* 0-nqueens.py
