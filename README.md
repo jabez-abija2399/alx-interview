@@ -23,3 +23,7 @@
 [0x05-nqueens](./0x05-nqueens)	
 * ## It focus on
 	* N Queens
+
+[0x06-starwars_api](./0x06-starwars_api)
+* ## It focus on
+  	* Star Wars API	
