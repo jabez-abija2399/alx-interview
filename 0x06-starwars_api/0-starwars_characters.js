@@ -1,20 +1,45 @@
 #!/usr/bin/node
 /* Star Wars Characters - Using the request module */
 const request = require('request');
-const urlApi = 'https://swapi-api.hbtn.io/api/films/';
+
 const movieId = process.argv[2];
-// query API
-request(urlApi + movieId, (error, response, body) => {
-  if (error) throw error;
-  const characters = JSON.parse(body).characters;
-  showNames(characters);
-});
-// show results on the console
-const showNames = (names, i = 0) => {
-  if (i === names.length) return;
-  request(names[i], (error, response, body) => {
-    if (error) throw error;
-    console.log(JSON.parse(body).name);
-    showNames(names, i + 1);
+
+if (!movieId) {
+  console.log('Please provide a movie ID as a command-line argument.');
+  process.exit(1);
+}
+
+const baseUrl = 'https://swapi.dev/api';
+const filmUrl = `${baseUrl}/films/${movieId}/`;
+
+request(filmUrl, (error, response, body) => {
+  if (error) {
+    console.error('Error fetching movie information:', error);
+    process.exit(1);
+  }
+
+  if (response.statusCode !== 200) {
+    console.error('Failed to fetch movie information. Status code:', response.statusCode);
+    process.exit(1);
+  }
+
+  const filmData = JSON.parse(body);
+  const characters = filmData.characters;
+
+  characters.forEach(characterUrl => {
+    request(characterUrl, (charError, charResponse, charBody) => {
+      if (charError) {
+        console.error('Error fetching character information:', charError);
+        return;
+      }
+
+      if (charResponse.statusCode !== 200) {
+        console.error('Failed to fetch character information. Status code:', charResponse.statusCode);
+        return;
+      }
+
+      const characterData = JSON.parse(charBody);
+      console.log(characterData.name);
+    });
   });
-};
+});
