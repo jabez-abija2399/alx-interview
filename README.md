@@ -27,3 +27,7 @@
 [0x06-starwars_api](./0x06-starwars_api)
 * ## It focus on
   	* Star Wars API	
+
+[0x07-rotate_2d_matrix])(./0x07-rotate_2d_matrix) 
+* ## It focus on 
+	* 2D matrix
