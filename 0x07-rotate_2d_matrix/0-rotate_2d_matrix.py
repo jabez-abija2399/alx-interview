@@ -4,15 +4,14 @@
 
 def rotate_2d_matrix(matrix):
     """ Given an n x n 2D matrix, rotate it 90 degrees clockwise. """
-    matrix_size = len(matrix)
-    for row_index in range(int(matrix_size / 2)):
-        distance_from_edge = 0
-        i = matrix_size - 1 - row_index
-
-        for column_index in range(row_index, matrix_size - 1 - row_index):
-            top_value = matrix[row_index][column_index]
-            matrix[row_index][column_index] = matrix[i - distance_from_edge][row_index]
-            matrix[i - distance_from_edge][row_index] = matrix[i][i - distance_from_edge]
-            matrix[i][i - distance_from_edge] = matrix[column_index][i]
-            matrix[column_index][i] = top_value
-            distance_from_edge += 1
+    _len = len(matrix)
+    for row in range(int(_len / 2)):
+        offset = 0
+        i = _len - 1 - row
+        for column in range(row, _len - 1 - row):
+            top = matrix[row][column]
+            matrix[row][column] = matrix[i - offset][row]
+            matrix[i - offset][row] = matrix[i][i - offset]
+            matrix[i][i - offset] = matrix[column][i]
+            matrix[column][i] = top
+            offset += 1
